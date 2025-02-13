@@ -1,5 +1,66 @@
 # Base de Datos
 
+## Herramientas
+
+- SQL
+- Docker
+- Power BI
+
+## Temario
+
+- Respaldo y recuperación
+- Concurrencia y bloqueo
+- Seguridad en BDD
+- Desarrollo de aplicaciones en BDD
+- Bases de datos distribuidas
+- Gestión de datos masivos
+-
+
+## Repaso Bases de Datos 1
+
+> **Base de datos:** Conjunto de datos que puedes ordenar y administrar
+
+El **Sistema de Gestión de Bases de Datos (SGBD)** trabaja en tres niveles:
+
+- Usuario / vista
+- Lógico
+- Físico
+
+````mindmap 
+Modelo de negocio - Semántica -> Modelo de datos -> Estructura formal de síntaxis
+````
+
+- **Concurrencia:** Cuando dos o mas usuarios intentan acceder al mismo recurso, al mismo tiempo, para leer o escribir.
+
+- **Campo:** Es el *grano* más fino de la concurrencia, posteriormente el **registro**, seguido de la **tabla** y 
+finalmente la **base de datos** es el grano más grueso.
+
+- **Consistencia:** Es cuando todos los usuarios pueden ver el mismo estado, la integridad es parte para que los datos
+  se guarden de manera correcta en el *modelo de datos*.
+
+- **Integridad:** Tenemos dos tipos:
+  - _La integridad de tabla:_ Todos los renglones deben de tener una llave primaria _(primarykey)_
+  - Y _la integridad referencial:_ Garantiza que las relaciones entre tablas sean válidas y consistentes gracias a
+ las llaves foráneas _(foreignkey)_
+
+- **Cascada:** permite eliminar o modificar toda la información de un registro, sólo es visible en el join.
+- **Restringir:** permite crear reglas y condiciones para modificar o eliminar registros
+- **Bloqueo:** es lo que permite mantener un orden, alentando el sistema para garantizar la consistencia.
+- **Transacción:** es el conjunto de operaciones que no se consideran terminadas hasta que la última no ha sido 
+ concluida, la transacción empieza con start y termina con commit o rollback.
+- **Buffer:** espacio temporal no consistente hasta no hacer commit.
+- **Estado:** registro en la Base de datos.
+- **Esquema:** Estructura de la base de datos.
+- **Diccionario de datos:** guarda los metadatos
+- **Data definition Language (DDL):** sirve para crear esquemas, create, alter y drop 
+- **Data Management Language (DML):** sirve para manipular los registros, insert, update, delete & select 
+- **View Management Language & CML**
+
+## Respaldo y recuperación de una Base de Datos
+- **Copia de seguridad:** El proceso de crear una copia de seguridad [sustantivo] mediante la copia de registros de datos de
+  una BD, o registros de log de su log de transacciones.
+- **Respaldo:** Una copia de datos que se puede usar para restaurar y recuperar los datos después de una falla.
+  - Las copias de seguridad de una BD también se pueden usar para restaurar una copia de la BD en una nueva ubicación.
 
 Descargar la bdd de classroom
 
@@ -30,7 +91,6 @@ insert into consumo values
 ('00023450279', sysdate(), '3', 'V', '780');
 ```
 
-
 Meter todo este todo, entrar a cliente
 
 ```````
@@ -40,13 +100,14 @@ group by YEAR(fecha)
 order by 1;
 ```````
 
-
 En consola:
 
-**mysqldump --deafults-file="C:\\ruta\parametroslocal.cnf" --no-create-info credito consumo --where="fecha" > = CURRENT_DATE()"> C:\\ruta\20250212_credito_current.sql** y esto básicamente hace un respaldo de la base de datos.
+**mysqldump --deafults-file="C:\\ruta\parametroslocal.cnf" --no-create-info credito consumo --where="fecha" > =
+CURRENT_DATE()"> C:\\ruta\20250212_credito_current.sql** y esto básicamente hace un respaldo de la base de datos.
 
-**mysqldump --deafults-file="C:\\ruta\parametroslocal.cnf" --no-create-info credito consumo --where="fecha" > = DATE_SUB(NOW(), INTERVAL 1 MONTH)" > C:\\ruta\20250212_credito_current.sql** otro respaldo, pero el formato de fecha es diferente
-
+**mysqldump --deafults-file="C:\\ruta\parametroslocal.cnf" --no-create-info credito consumo --where="fecha" > =
+DATE_SUB(NOW(), INTERVAL 1 MONTH)" > C:\\ruta\20250212_credito_current.sql** otro respaldo, pero el formato de fecha es
+diferente
 
 ````
  #!/bin/bash
